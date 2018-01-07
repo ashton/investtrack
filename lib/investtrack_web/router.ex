@@ -9,5 +9,6 @@ defmodule InvesttrackWeb.Router do
     pipe_through :api
 
     resources "/users", UserController, except: [:new, :edit]
+    resources "/prices", StockController, except: [:new, :edit]
   end
 end
