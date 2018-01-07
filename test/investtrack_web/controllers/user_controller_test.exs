@@ -33,8 +33,7 @@ defmodule InvesttrackWeb.UserControllerTest do
       assert json_response(conn, 200)["data"] == %{
         "id" => id,
         "email" => "some email",
-        "name" => "some name",
-        "password" => "E62E1269317B9654E1314DFECB78F29B35AD4D362DA0A9C2CCDB680AA535D7EA"}
+        "name" => "some name"}
     end
 
     test "renders errors when data is invalid", %{conn: conn} do
@@ -54,8 +53,7 @@ defmodule InvesttrackWeb.UserControllerTest do
       assert json_response(conn, 200)["data"] == %{
         "id" => id,
         "email" => "some updated email",
-        "name" => "some updated name",
-        "password" => "49DA8493D09BB682139DB31EA74B1A007D6D1A1ECED0C6EB6773603D5C097AA2"}
+        "name" => "some updated name"}
     end
 
     test "renders errors when data is invalid", %{conn: conn, user: user} do
