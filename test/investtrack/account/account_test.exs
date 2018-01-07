@@ -19,6 +19,11 @@ defmodule Investtrack.AccountTest do
       user
     end
 
+    test "hash_password/1 return a hashed sha256 string" do
+      hashed = Account.hash_password("some password")
+      assert hashed == "E62E1269317B9654E1314DFECB78F29B35AD4D362DA0A9C2CCDB680AA535D7EA"
+    end
+
     test "list_users/0 returns all users" do
       user = user_fixture()
       assert Account.list_users() == [user]
@@ -33,7 +38,7 @@ defmodule Investtrack.AccountTest do
       assert {:ok, %User{} = user} = Account.create_user(@valid_attrs)
       assert user.email == "some email"
       assert user.name == "some name"
-      assert user.password == "some password"
+      assert user.password == "E62E1269317B9654E1314DFECB78F29B35AD4D362DA0A9C2CCDB680AA535D7EA"
     end
 
     test "create_user/1 with invalid data returns error changeset" do
@@ -46,7 +51,7 @@ defmodule Investtrack.AccountTest do
       assert %User{} = user
       assert user.email == "some updated email"
       assert user.name == "some updated name"
-      assert user.password == "some updated password"
+      assert user.password == "49DA8493D09BB682139DB31EA74B1A007D6D1A1ECED0C6EB6773603D5C097AA2"
     end
 
     test "update_user/2 with invalid data returns error changeset" do

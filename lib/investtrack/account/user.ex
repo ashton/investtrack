@@ -15,7 +15,6 @@ defmodule Investtrack.Account.User do
 
   @doc false
   def changeset(%User{} = user, attrs) do
-    IO.inspect(get_required_fields(user))
     user
     |> cast(attrs, [:name, :email, :password])
     |> validate_required(get_required_fields(user))

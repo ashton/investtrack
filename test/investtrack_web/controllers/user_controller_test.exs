@@ -26,7 +26,7 @@ defmodule InvesttrackWeb.UserControllerTest do
 
   describe "create user" do
     test "renders user when data is valid", %{conn: conn} do
-      conn = post conn, user_path(conn, :create), user: @create_attrs
+      conn = post conn, user_path(conn, :create), @create_attrs
       assert %{"id" => id} = json_response(conn, 201)["data"]
 
       conn = get conn, user_path(conn, :show, id)
@@ -34,11 +34,11 @@ defmodule InvesttrackWeb.UserControllerTest do
         "id" => id,
         "email" => "some email",
         "name" => "some name",
-        "password" => "some password"}
+        "password" => "E62E1269317B9654E1314DFECB78F29B35AD4D362DA0A9C2CCDB680AA535D7EA"}
     end
 
     test "renders errors when data is invalid", %{conn: conn} do
-      conn = post conn, user_path(conn, :create), user: @invalid_attrs
+      conn = post conn, user_path(conn, :create), @invalid_attrs
       assert json_response(conn, 422)["errors"] != %{}
     end
   end
@@ -47,7 +47,7 @@ defmodule InvesttrackWeb.UserControllerTest do
     setup [:create_user]
 
     test "renders user when data is valid", %{conn: conn, user: %User{id: id} = user} do
-      conn = put conn, user_path(conn, :update, user), user: @update_attrs
+      conn = put conn, user_path(conn, :update, user), @update_attrs
       assert %{"id" => ^id} = json_response(conn, 200)["data"]
 
       conn = get conn, user_path(conn, :show, id)
@@ -55,11 +55,11 @@ defmodule InvesttrackWeb.UserControllerTest do
         "id" => id,
         "email" => "some updated email",
         "name" => "some updated name",
-        "password" => "some updated password"}
+        "password" => "49DA8493D09BB682139DB31EA74B1A007D6D1A1ECED0C6EB6773603D5C097AA2"}
     end
 
     test "renders errors when data is invalid", %{conn: conn, user: user} do
-      conn = put conn, user_path(conn, :update, user), user: @invalid_attrs
+      conn = put conn, user_path(conn, :update, user), @invalid_attrs
       assert json_response(conn, 422)["errors"] != %{}
     end
   end
