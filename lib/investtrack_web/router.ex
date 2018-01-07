@@ -7,5 +7,7 @@ defmodule InvesttrackWeb.Router do
 
   scope "/api", InvesttrackWeb do
     pipe_through :api
+
+    resources "/users", UserController, except: [:new, :edit]
   end
 end
