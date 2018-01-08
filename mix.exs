@@ -20,7 +20,7 @@ defmodule Investtrack.Mixfile do
   def application do
     [
       mod: {Investtrack.Application, []},
-      extra_applications: [:logger, :runtime_tools]
+      extra_applications: [:logger, :runtime_tools, :timex]
     ]
   end
 
@@ -38,7 +38,8 @@ defmodule Investtrack.Mixfile do
       {:phoenix_ecto, "~> 3.2"},
       {:postgrex, ">= 0.0.0"},
       {:gettext, "~> 0.11"},
-      {:cowboy, "~> 1.0"}
+      {:cowboy, "~> 1.0"},
+      {:timex, "~> 3.0"}
     ]
   end
 
