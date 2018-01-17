@@ -17,6 +17,7 @@ defmodule Investtrack.Repo.Migrations.CreateStockPrices do
       add :best_sell, :decimal
       add :trade_count, :integer
       add :trade_amount, :integer
+      add :trade_volume, :decimal
       add :date, :naive_datetime, primary_key: true
 
       timestamps()

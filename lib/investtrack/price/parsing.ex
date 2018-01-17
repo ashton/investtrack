@@ -12,7 +12,7 @@ defmodule Investtrack.Price.Parsing do
    %{id: :best_buy, start_pos: 121, end_pos: 133, formatter: :float},
    %{id: :best_sell, start_pos: 134, end_pos: 146, formatter: :float},
    %{id: :trade_count, start_pos: 147, end_pos: 151, formatter: :integer},
-   %{id: :trade_amount, start_pos: 152, end_pos: 169, formatter: :integer}
+   %{id: :trade_amount, start_pos: 152, end_pos: 169, formatter: :integer},
    %{id: :trade_volume, start_pos: 170, end_pos: 187, formatter: :float}]
   end
 

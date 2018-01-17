@@ -50,6 +50,7 @@ defmodule Investtrack.Price do
 
   """
   def create_stock(attrs \\ %{}) do
+    IO.inspect(attrs)
     %Stock{}
     |> Stock.changeset(attrs)
     |> Repo.insert()
