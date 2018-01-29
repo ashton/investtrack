@@ -1,8 +1,8 @@
 defmodule Mix.Tasks.Investtrack.Import do
   use Mix.Task
   import Mix.Ecto
-  alias Investtrack.Price
-  alias Investtrack.Price.Parsing
+  alias Investtrack.HistoricalData
+  alias Investtrack.HistoricalData.Parsing
 
   @shortdoc "Import historical data from bovespa"
 
@@ -21,7 +21,7 @@ defmodule Mix.Tasks.Investtrack.Import do
         |> Parsing.remove_header
         |> Parsing.remove_footer
         |> Parsing.parse_rows
-        |> Enum.each(&Price.create_stock/1)
+        |> Enum.each(&HistoricalData.create_stock_data/1)
 
         Mix.shell.info "File #{path} parsed successfully"
       {:error, reason} ->

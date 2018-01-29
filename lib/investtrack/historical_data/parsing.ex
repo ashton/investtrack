@@ -1,4 +1,4 @@
-defmodule Investtrack.Price.Parsing do
+defmodule Investtrack.HistoricalData.Parsing do
   def get_rules() do
     [%{id: :date, start_pos: 2, end_pos: 9, formatter: :date},
    %{id: :code, start_pos: 12, end_pos: 23, formatter: :text},
