@@ -16,26 +16,18 @@ defmodule Investtrack.HistoricalData.Parsing do
    %{id: :trade_volume, start_pos: 170, end_pos: 187, formatter: :float}]
   end
 
-  def parse(value, target) when target == :integer, do: String.to_integer(value)
-
-  def parse(value, target) when target == :text, do: String.trim(value)
-
-  def parse(value, target) when target == :float do
-    len = String.length(value)
-    integer_slice = Range.new(0, len-3)
-    decimal_slice = Range.new(len-2, len-1)
-    
-    "#{String.slice(value, integer_slice)}.#{String.slice(value, decimal_slice)}"
-    |> String.to_float
-  end
-
-  def parse(value, target) when target == :date do
-    {:ok, date} = Timex.parse(value, "{YYYY}{0M}{0D}")
-    date
-  end
-
-  def parse_rows(rows) do
-    Enum.map(rows, &parse_row/1)
+  def parse(value, target) do
+    case target do
+      :integer -> String.to_integer(value)
+      :text -> String.trim(value)
+      :float -> 
+        len = String.length(value)
+        "#{String.slice(value, 0..len-3)}.#{String.slice(value, len-2..len-1)}"
+        |> String.to_float
+      :date ->
+        {:ok, date} = Timex.parse(value, "{YYYY}{0M}{0D}")
+        date
+    end
   end
 
   def parse_row(row) do
@@ -46,7 +38,7 @@ defmodule Investtrack.HistoricalData.Parsing do
 
   def extract_segment(text, %{start_pos: start_pos, end_pos: end_pos, formatter: target}) do
     text
-    |> String.slice(Range.new(start_pos, end_pos))
+    |> String.slice(start_pos..end_pos)
     |> parse(target)
   end
 
