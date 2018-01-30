@@ -10,5 +10,6 @@ defmodule InvesttrackWeb.Router do
 
     resources "/users", UserController, except: [:new, :edit]
     resources "/historical", StockDataController, only: [:index, :show]
+    resources "/shares", ShareController, only: [:index, :show]
   end
 end
