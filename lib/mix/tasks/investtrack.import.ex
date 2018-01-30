@@ -15,21 +15,14 @@ defmodule Mix.Tasks.Investtrack.Import do
   def run([path | _tail]) do
     ensure_started(Investtrack.Repo, [])
 
-    case File.read(path) do
-      {:ok, body} ->
-        body
-        |> String.split("\r\n")
-        |> Parsing.remove_header
-        |> Parsing.remove_footer
-        |> Parsing.parse_rows
-        |> Enum.map(&HistoricalData.create_stock_data/1)
-        |> Enum.map(fn {:ok, historical_data} -> Map.take(historical_data, [:name, :code]) end)
-        |> Enum.into(MapSet.new)
-        |> Enum.map(&Stock.create_share/1) 
-
-        Mix.shell.info "File #{path} parsed successfully"
-      {:error, reason} ->
-        Mix.shell.error "Error reading file #{path}: #{reason}"
-    end
+    File.stream!(path)
+    |> Stream.drop(1)  # remove header
+    |> Stream.drop(-1) # remove footer
+    |> Stream.map(&Parsing.parse_row/1)
+    |> Stream.map(&HistoricalData.create_stock_data/1)
+    |> Stream.map(fn {:ok, historical_data} -> Map.take(historical_data, [:name, :code]) end)
+    |> Stream.uniq
+    |> Stream.map(&Stock.create_share/1)
+    |> Stream.run
   end
 end

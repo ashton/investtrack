@@ -41,16 +41,4 @@ defmodule Investtrack.HistoricalData.Parsing do
     |> String.slice(start_pos..end_pos)
     |> parse(target)
   end
-
-  def remove_header(rows) do
-    rows 
-    |> List.delete_at(0)
-    |> List.delete_at(0)
-  end
-
-  def remove_footer(rows) do
-    rows
-    |> List.delete_at(-1)
-    |> List.delete_at(-1)
-  end
 end
