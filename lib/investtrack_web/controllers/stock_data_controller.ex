@@ -2,7 +2,6 @@ defmodule InvesttrackWeb.StockDataController do
   use InvesttrackWeb, :controller
 
   alias Investtrack.HistoricalData
-  alias Investtrack.HistoricalData.StockData
 
   action_fallback InvesttrackWeb.FallbackController
 
