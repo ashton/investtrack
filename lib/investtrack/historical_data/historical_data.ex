@@ -17,41 +17,10 @@ defmodule Investtrack.HistoricalData do
       [%StockData{}, ...]
 
   """
-  def list_stock_historical_data do
-    Repo.all(StockData)
+  def list_stock_historical_data(code) do
+    query = from s in StockData, where: s.code == ^code
+    Repo.all(query)
   end
-
-  @doc """
-  Gets a single stock_data.
-
-  Raises `Ecto.NoResultsError` if the Stock data does not exist.
-
-  ## Examples
-
-      iex> get_stock_data!(123)
-      %StockData{}
-
-      iex> get_stock_data!(456)
-      ** (Ecto.NoResultsError)
-
-  """
-  def get_stock_data!(id), do: Repo.get!(StockData, id)
-
-  @doc """
-  Gets a single stock_data from its share code.
-
-  Raises `Ecto.NoResultsError` if the Stock data does not exist.
-
-  ## Examples
-
-      iex> get_stock_data_by_code!("FIIP11B")
-      %StockData{}
-
-      iex> get_stock_data_by_code!("invalid")
-      ** (Ecto.NoResultsError)
-
-  """
-  def get_stock_data_by_code!(code), do: Repo.get_by!(StockData, code: code)
 
   @doc """
   Creates a stock_data.
@@ -116,5 +85,10 @@ defmodule Investtrack.HistoricalData do
   """
   def change_stock_data(%StockData{} = stock_data) do
     StockData.changeset(stock_data, %{})
+  end
+
+  def get_last_prices!(code) do
+    list_stock_historical_data(code)
+    |> last(:date)
   end
 end

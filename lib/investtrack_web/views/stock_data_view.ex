@@ -2,11 +2,11 @@ defmodule InvesttrackWeb.StockDataView do
   use InvesttrackWeb, :view
   alias InvesttrackWeb.StockDataView
 
-  def render("index.json", %{stock_historical_data: stock_historical_data}) do
-    %{data: render_many(stock_historical_data, StockDataView, "stock_data.json")}
+  def render("stock_data_list.json", %{stock_history: stock_history}) do
+    %{data: render_many(stock_history, StockDataView, "stock_data.json")}
   end
 
-  def render("show.json", %{stock_data: stock_data}) do
+  def render("stock_data_object.json", %{stock_data: stock_data}) do
     %{data: render_one(stock_data, StockDataView, "stock_data.json")}
   end
 

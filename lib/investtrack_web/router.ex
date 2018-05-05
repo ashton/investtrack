@@ -9,7 +9,7 @@ defmodule InvesttrackWeb.Router do
     pipe_through :api
 
     resources "/users", UserController, except: [:new, :edit]
-    resources "/historical", StockDataController, only: [:index, :show]
+    resources "/historical", StockDataController, only: [:index, :show], param: "code"
     resources "/shares", ShareController, only: [:index, :show]
   end
 end

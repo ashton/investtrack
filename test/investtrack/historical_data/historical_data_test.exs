@@ -19,14 +19,9 @@ defmodule Investtrack.HistoricalDataTest do
       stock_data
     end
 
-    test "list_stock_historical_data/0 returns all stock_historical_data" do
-      stock_data = stock_data_fixture()
-      assert HistoricalData.list_stock_historical_data() == [stock_data]
-    end
-
-    test "get_stock_data!/1 returns the stock_data with given id" do
-      stock_data = stock_data_fixture()
-      assert HistoricalData.get_stock_data!(stock_data.id) == stock_data
+    test "list_stock_historical_data/1 returns all stock_historical_data from that share code" do
+      stock_data = stock_data_fixture(code: "some code")
+      assert HistoricalData.list_stock_historical_data("some code") == [stock_data]
     end
 
     test "create_stock_data/1 with valid data creates a stock_data" do
@@ -71,13 +66,13 @@ defmodule Investtrack.HistoricalDataTest do
     test "update_stock_data/2 with invalid data returns error changeset" do
       stock_data = stock_data_fixture()
       assert {:error, %Ecto.Changeset{}} = HistoricalData.update_stock_data(stock_data, @invalid_attrs)
-      assert stock_data == HistoricalData.get_stock_data!(stock_data.id)
+      assert stock_data == HistoricalData.list_stock_historical_data(stock_data.code) |> List.first
     end
 
     test "delete_stock_data/1 deletes the stock_data" do
       stock_data = stock_data_fixture()
       assert {:ok, %StockData{}} = HistoricalData.delete_stock_data(stock_data)
-      assert_raise Ecto.NoResultsError, fn -> HistoricalData.get_stock_data!(stock_data.id) end
+      assert [] == HistoricalData.list_stock_historical_data(stock_data.code)
     end
 
     test "change_stock_data/1 returns a stock_data changeset" do
