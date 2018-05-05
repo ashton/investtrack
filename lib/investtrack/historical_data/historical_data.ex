@@ -38,6 +38,22 @@ defmodule Investtrack.HistoricalData do
   def get_stock_data!(id), do: Repo.get!(StockData, id)
 
   @doc """
+  Gets a single stock_data from its share code.
+
+  Raises `Ecto.NoResultsError` if the Stock data does not exist.
+
+  ## Examples
+
+      iex> get_stock_data_by_code!("FIIP11B")
+      %StockData{}
+
+      iex> get_stock_data_by_code!("invalid")
+      ** (Ecto.NoResultsError)
+
+  """
+  def get_stock_data_by_code!(code), do: Repo.get_by!(StockData, code: code)
+
+  @doc """
   Creates a stock_data.
 
   ## Examples

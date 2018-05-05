@@ -6,8 +6,8 @@ defmodule Investtrack.HistoricalDataTest do
   describe "stock_historical_data" do
     alias Investtrack.HistoricalData.StockData
 
-    @valid_attrs %{avg_price: "120.5", best_buy: "120.5", best_sell: "120.5", code: "some code", date: ~N[2010-04-17 14:00:00.000000], last_price: "120.5", market_type: "some market_type", max_price: "120.5", min_price: "120.5", name: "some name", opening_price: "120.5", trade_amount: 42, trade_count: 42}
-    @update_attrs %{avg_price: "456.7", best_buy: "456.7", best_sell: "456.7", code: "some updated code", date: ~N[2011-05-18 15:01:01.000000], last_price: "456.7", market_type: "some updated market_type", max_price: "456.7", min_price: "456.7", name: "some updated name", opening_price: "456.7", trade_amount: 43, trade_count: 43}
+    @valid_attrs %{avg_price: "120.5", best_buy: "120.5", best_sell: "120.5", code: "some code", date: ~N[2010-04-17 14:00:00.000000], last_price: "120.5", market_type: "some market_type", max_price: "120.5", min_price: "120.5", name: "some name", opening_price: "120.5", trade_amount: 42, trade_count: 42, trade_volume: 42}
+    @update_attrs %{avg_price: "456.7", best_buy: "456.7", best_sell: "456.7", code: "some updated code", last_price: "456.7", market_type: "some updated market_type", max_price: "456.7", min_price: "456.7", name: "some updated name", opening_price: "456.7", trade_amount: 43, trade_count: 43}
     @invalid_attrs %{avg_price: nil, best_buy: nil, best_sell: nil, code: nil, date: nil, last_price: nil, market_type: nil, max_price: nil, min_price: nil, name: nil, opening_price: nil, trade_amount: nil, trade_count: nil}
 
     def stock_data_fixture(attrs \\ %{}) do
@@ -58,7 +58,6 @@ defmodule Investtrack.HistoricalDataTest do
       assert stock_data.best_buy == Decimal.new("456.7")
       assert stock_data.best_sell == Decimal.new("456.7")
       assert stock_data.code == "some updated code"
-      assert stock_data.date == ~N[2011-05-18 15:01:01.000000]
       assert stock_data.last_price == Decimal.new("456.7")
       assert stock_data.market_type == "some updated market_type"
       assert stock_data.max_price == Decimal.new("456.7")
